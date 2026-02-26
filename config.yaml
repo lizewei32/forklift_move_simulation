@@ -1,0 +1,139 @@
+# ============================================================================
+# 无人叉车仿真配置文件 / Forklift Simulation Configuration
+# ============================================================================
+
+# 叉车物理参数 / Forklift Physical Parameters
+forklift:
+  length: 2.6          # 车体长度 (m)
+  width: 1.6           # 车体宽度 (m)
+  steer_dist: 2.1      # 舵轮距离车体中心的距离 (m)
+  track_width: 0.7     # 左右轮距 (m)
+  path_width: 4.6      # 叉车路径宽度 (m)
+
+# 仿真参数 / Simulation Parameters
+simulation:
+  dt: 0.01             # 仿真时间步长 (s)
+
+# 可视化配置 / Visualization Configuration
+visualization:
+  # 图形尺寸 / Figure Size
+  figure:
+    static_width: 12
+    static_height: 10
+    animated_width: 14
+    animated_height: 12
+  
+  # 绘制参数 / Drawing Parameters
+  drawing:
+    trajectory_sample_step: 50    # 静态图中每隔多少个点绘制一次叉车
+    margin_ratio: 1.0             # 坐标轴边距相对于车辆尺寸的比例
+    dpi: 150                      # 图像分辨率
+    
+  # 动画参数 / Animation Parameters
+  animation:
+    interval: 30                  # 帧间隔 (ms)
+    fps: 20                       # 帧率
+  
+  # 车身形状比例 / Body Shape Ratios
+  body:
+    length_ratio: 0.3             # 车身长度占总车长的比例
+    front_position: 0.9           # 车身前端位置比例
+  
+  # 后轮形状比例 / Wheel Shape Ratios
+  wheel:
+    length_ratio: 0.7             # 后轮长度占总车长的比例
+    width_ratio: 0.2              # 后轮宽度占总车宽的比例
+    gap_ratio: 0.3                # 两个后轮之间的间距占总车宽的比例
+    back_position: -0.1           # 后轮后端位置比例
+  
+  # 舵轮椭圆尺寸比例 / Steering Wheel Ellipse Ratios
+  steering_wheel:
+    width_ratio: 0.1              # 舵轮椭圆短轴占车宽的比例
+    length_ratio: 0.2             # 舵轮椭圆长轴占车宽的比例
+  
+  # 托盘尺寸比例 / Pallet Size Ratios
+  pallet_count: 8          # 托盘数量
+  pallet_spacing: 3.5      # 托盘间距（米）
+  colors:
+    pallet: 'gray'         # 托盘边框颜色
+    pallet_fill: 'lightgray'  # 托盘填充颜色
+  pallet:
+    length_ratio: 0.7             # 托盘长度相对于车长的比例
+    width: 1.8                    # 托盘宽度 (m) - 固定值
+    offset_ratio: -0.1            # 托盘位置偏移相对于车长的比例
+  
+  # 箭头参数 / Arrow Parameters
+  arrow:
+    length_ratio_static: 0.4      # 静态图方向箭头长度占车长的比例
+    length_ratio_animated: 0.5    # 动画方向箭头长度占车长的比例
+    head_width: 0.1               # 箭头头部宽度 (m)
+    head_length: 0.1              # 箭头头部长度 (m)
+  
+  # 颜色配置 / Color Configuration
+  colors:
+    trajectory: 'b'               # 轨迹颜色
+    body: 'steelblue'             # 车身颜色
+    body_alpha: 0.4               # 车身透明度
+    wheel: 'black'                # 后轮颜色
+    wheel_alpha: 0.8              # 后轮透明度
+    steering_wheel: 'orange'      # 舵轮颜色
+    steering_line: 'c'            # 舵轮方向线颜色
+    direction_arrow: 'red'        # 方向箭头颜色
+    pallet_border: 'gray'         # 托盘边框颜色
+    pallet_fill: 'lightgray'      # 托盘填充颜色
+    pallet_alpha: 0.3             # 托盘透明度
+    start_point: 'go'             # 起点标记颜色
+    end_point: 'ro'               # 终点标记颜色
+  
+  # 线宽配置 / Line Width Configuration
+  linewidth:
+    trajectory: 2.0               # 轨迹线宽
+    body: 1.5                     # 车身线宽
+    wheel: 1.5                    # 后轮线宽
+    steering_wheel: 2.0           # 舵轮线宽
+    direction: 2.0                # 方向箭头线宽
+    pallet: 3.0                   # 托盘线宽
+  
+  # 标记大小 / Marker Size
+  markers:
+    start_end_size: 10            # 起点/终点标记大小
+    current_pos_size: 8           # 当前位置标记大小
+  
+  # 文本配置 / Text Configuration
+  text:
+    xlabel: 'X 位置 (m)'
+    ylabel: 'Y 位置 (m)'
+    title_static: '无人叉车轨迹仿真'
+    title_animated: '无人叉车动态仿真'
+    font_size_label: 12
+    font_size_title: 14
+    legend_location: 'upper right'
+  
+  # 图例标签 / Legend Labels
+  labels:
+    trajectory: '轨迹'
+    forklift: '叉车'
+    direction: '方向'
+    steering_wheel: '舵轮'
+    pallet: '托盘'
+    start_point: '起点'
+    end_point: '终点'
+
+# 输出配置 / Output Configuration
+output:
+  default_static_filename: 'forklift_trajectory_static.png'
+  default_animated_filename: 'forklift_trajectory_animated.gif'
+  save_bbox_inches: 'tight'
+
+# 路径生成参数 / Path Generation Parameters (用于path_generator.py)
+path_generation:
+  pid:
+    kp: 0.5                       # PID比例系数
+    ki: 0.01                      # PID积分系数
+    kd: 0.1                       # PID微分系数
+  
+  motion:
+    max_speed: 1.5                # 最大速度 (m/s)
+    max_steering_angle: 90.0      # 最大转向角度 (degrees)
+    acceleration: 0.5             # 加速度 (m/s²)
+    deceleration: 0.8             # 减速度 (m/s²)
